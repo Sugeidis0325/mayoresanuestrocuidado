@@ -1,0 +1,167 @@
+* Se crea la base de datos */
+CREATE DATABASE mayoresanuestrocuidado;
+USE mayoresanuestrocuidado;
+
+/*CREACIÓN DE TABLAS*/
+
+/*SE CREA UNA TABLA QUE NO REQUIEREN LLAVES FORANEAS*/
+
+/* Se crea la tabla rol*/
+CREATE LA TABLA rol (
+rol id INT (1) NOT null,
+rol Nombre VACHAR (13) NOT null, 
+PRIMARY REY (rol_id)
+);
+/* Se crea la tabla tipo usuario*/
+CREATE TABLA usuario (
+id_usuario INT NOT NULL,
+rol_idrol VACHAR (10) NOT NULL,
+nombre VACHAR (10)
+apellido INT NOT NULL,
+telefono INT NOT NULL,
+cargo VACHAR NOT NULL,
+num_documento INT NOT NULL,
+PRIMARY REY (id_usuario)
+);
+
+/*Se crea la tabla tipo reporte*/
+CREATE TABLA reporte (
+id_reportes INT NOT NULL,
+usuarios_idusuarios VARCHAR(10) NOT NULL,
+medico_idmedico INT
+registro actividades_idregistro actividades INT 
+id_usuarios INT
+fecha DATE
+PRIMARY KEY (idtipo_reporte)
+);
+/*SE CREAN LAS TABLAS QUE REQUIEREN LLAVES FORANEAS*/
+/*Se crea la tabla cuidados del paciente*/ 
+CREATE TABLE cuidados del paciente( 
+idcuidados_paciente INT AUTO_INCREMENT NOT NULL,
+pacientes_idpacientes INT NOT NULL,
+cuidados VARCHAR(20) NOT NULL,
+medicamentos VARCHAR(20) NOT NULL,
+tratamientos VARCHAR(15) NOT NULL,
+PRIMARY KEY (id_cuidadospaciente), 
+FOREIGN KEY (pacientes_idpacientes)
+);
+
+/*Se crea la tabla registro actividades*/ 
+CREATE TABLE registro de actividades(
+idregistro_actividades INT AUTO_INCREMENT NOT NULL, 
+usuarios_idusuarios INT NOT NULL,
+reportes VARCHAR	NOT NULL, 
+usuario VARCHAR
+
+PRIMARY KEY (idregistro_actividades),
+FOREIGN KEY (usuario_usu_id) REFERENCES usuarios(id_usuarios)
+);
+
+/*Se crea la tabla medico*/ 
+CREATE TABLE medico(
+id_medico INT AUTO_INCREMENT NOT NULL, 
+nombre VARCHAR	NOT NULL,
+apellido VARCHAR	NOT NULL,
+telefono INT	NOT NULL ,
+direccion VARCHAR NOT NULL, 
+correo VARCHAR NOT NULL,
+PRIMARY KEY (id_medico),
+FOREIGN KEY (nombre) REFERENCES telefono(pri_id),
+FOREIGN KEY (direccion) REFERENCES direccion(direccion_id)
+);
+
+/*Se crea la tabla pacientes*/
+CREATE TABLE pacientes(
+id_pacienetes INT AUTO_INCREMENT NOT NULL,
+medico_id medico INT NOT NULL,
+nombres VARCHAR	NOT NULL,
+apellidos INT NOT NULL,
+fecha_nacimiento DATE NOT NULL,
+fecha_ingreso DATE NOT NULL, 
+RH CHAR NOT NULL,
+telefono INT NOT NULL, 
+direccion VARCHAR NOT NULL, 
+num_documento INT NOT NULL, 
+PRIMARY KEY (id_pacienetes),
+FOREIGN KEY (tarea_tar_id) REFERENCES (fecha_nacimiento),
+FOREIGN KEY (medico_id medico) REFERENCES fecha_ingreso
+);
+
+/*Se crea la tabla acudiente*/ 
+CREATE TABLE acudiente
+id_acudiente INT AUTO_INCREMENT NOT NULL, 
+paciente_idpaciente INT NOT NULL,
+nombre VARCHAR	NOT NULL,
+apellido	VARCHAR	NOT NULL, 
+telefono INT (50) NOT NULL , 
+direccion VARCHAR(50) NOT NULL, 
+correo VARCHAR NOT NULL,
+PRIMARY KEY (id_acudiente),
+FOREIGN KEY (paciente_idpaciente) REFERENCES (nombre),
+FOREIGN KEY (tipo_reporte_idtipo_reporte) REFERENCES
+(direccion_nombre)
+);
+
+/*INGRESO DE DATOS A LAS TABLAS*/
+
+/*Se insertan los datos a cada una de las tablas*/
+
+/*Solo se tienen dos roles dentro del sistema*/ 
+INSERT INTO rol VALUES
+        (1,'Administrador'),
+        (2,'Gerente')
+        (3,'Acudiente'),
+        (4,'Cuidador')
+
+/* se tienen tres	tipos de resportes*/ 
+INSERT INTO tipo_reporte VALUES
+        (1, 'Diario'),
+        (2, 'mensual'),
+        (2, 'semanal'),
+
+/* se tiene la tabla de pacientes */ 
+INSERT INTO pacientes
+   (id_pacienetes,nombres,apellidos,RH,telefono,num_documento); 
+  VALUES ('182733,camilo,vargas,o+,3112279230,100118623');
+      VALUES ('282727,sebastian,sanchez,o-,3112279230,100118689');
+
+  INTO cuidados	(descripcion,medicamentos_aliementacion,tratamientos) 
+VALUES ('ir al medico ','almuerzo', 'acetaminofen');
+VALUES ('terapias ','desayuno ', 'acetaminofen');
+
+INTO acudiente	(nombre,apellido,id_acudeinete,correo) 
+VALUES ('raul','ochoa', '11322334',raul@gmail.com);
+VALUES ('maria','torres', '6565656',maria@gmail.com);
+
+/*Se consulta el usuario y la hora en que ingreso*/ 
+SELECT nombre, hora_entrada FROM usuario AS u 
+INNER JOIN ingreso	AS a ON
+       a.usuario_usu_id=u.usu_id;
+
+/*Se consulta el nombre del usuario y su respectivo rol*/
+SELECT rol_rol,u. nombre FROM rol AS r
+INNER JOIN usuario AS u ON 
+       rol_id=u.rol_rol_id;
+
+/*Se consulta el nombre de los usuarios, con su id, que realizaron 
+reportes y el nombre de reporte con su respectivo tipo*/
+SELECT usuarioasignado.usu_id,
+usuario.usu_nombre,reporte.rep_reporte,tipo_reporte.tipo FROM
+(((reporte
+INNER JOIN usuarioasignado ON
+       reporte.usuarioasignado_usu_id=usuarioasignado.usuario_usu_id)
+INNER JOIN usuario ON
+       usuarioasignado.usu_id=usuario.usu_id)
+INNER JOIN tipo_reporte ON 
+       reporte.tipo_reporte_idtipo_reporte=tipo_reporte.idtipo_report
+e);
+
+/*Se consulta todos los datos de la tabla pacientes*/ 
+SELECT * FROM pacientes;
+
+/*Se consulta todos los datos de la tabla reporte*/
+SELECT * FROM reportes;
+
+/*Se eliminan, de la tabla registro de actividades*/
+DELETE FROM registro actividades WHERE reportes	LIKE 're%';
+
